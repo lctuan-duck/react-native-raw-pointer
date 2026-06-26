@@ -45,14 +45,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/placeholder/react-native-raw-pointer.git"
+    "url": "git+https://github.com/lctuan-duck/react-native-raw-pointer.git"
   },
-  "author": "Le Cong Tuan <tuan.le@ctgroupvietnam.com> (https://github.com)",
+  "author": "Le Cong Tuan <lctuan.dev@gmail.com> (https://github.com/lctuan-duck)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/placeholder/react-native-raw-pointer/issues"
+    "url": "https://github.com/lctuan-duck/react-native-raw-pointer/issues"
   },
-  "homepage": "https://github.com/placeholder/react-native-raw-pointer#readme",
+  "homepage": "https://github.com/lctuan-duck/react-native-raw-pointer#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

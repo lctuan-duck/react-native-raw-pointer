@@ -1,38 +1,35 @@
 package com.rawpointer
 
-import android.graphics.Color
 import com.facebook.react.module.annotations.ReactModule
-import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.ViewManagerDelegate
+import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
-import com.facebook.react.viewmanagers.RawPointerViewManagerInterface
-import com.facebook.react.viewmanagers.RawPointerViewManagerDelegate
 
+/**
+ * RawPointerViewManager — registers RawPointerView with React Native.
+ *
+ * Extends ViewGroupManager (not SimpleViewManager) because RawPointerView
+ * extends FrameLayout, which hosts React Native children. Fabric casts the
+ * manager to IViewGroupManager at runtime — using SimpleViewManager would
+ * cause a ClassCastException.
+ *
+ * Note: getExportedCustomDirectEventTypeConstants() is intentionally omitted.
+ * In New Architecture (Fabric), event routing is defined by the codegen spec
+ * (RawPointerViewNativeComponent.ts) and handled by the C++ Fabric layer.
+ * The method is only needed for Old Architecture RCTEventEmitter dispatch.
+ */
 @ReactModule(name = RawPointerViewManager.NAME)
-class RawPointerViewManager : SimpleViewManager<RawPointerView>(),
-  RawPointerViewManagerInterface<RawPointerView> {
-  private val mDelegate: ViewManagerDelegate<RawPointerView>
+class RawPointerViewManager : ViewGroupManager<RawPointerView>() {
 
-  init {
-    mDelegate = RawPointerViewManagerDelegate(this)
-  }
+  override fun getName(): String = NAME
 
-  override fun getDelegate(): ViewManagerDelegate<RawPointerView>? {
-    return mDelegate
-  }
+  override fun createViewInstance(context: ThemedReactContext): RawPointerView =
+    RawPointerView(context)
 
-  override fun getName(): String {
-    return NAME
-  }
-
-  public override fun createViewInstance(context: ThemedReactContext): RawPointerView {
-    return RawPointerView(context)
-  }
-
-  @ReactProp(name = "color")
-  override fun setColor(view: RawPointerView?, color: Int?) {
-    view?.setBackgroundColor(color ?: Color.TRANSPARENT)
+  /** behavior: "opaque" (default) | "transparent" */
+  @ReactProp(name = "behavior")
+  fun setBehavior(view: RawPointerView, value: String?) {
+    view.setBehavior(value ?: "opaque")
   }
 
   companion object {
