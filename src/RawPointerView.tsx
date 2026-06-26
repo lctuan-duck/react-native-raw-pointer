@@ -30,6 +30,20 @@ export interface RawPointerViewProps extends ViewProps {
    */
   behavior?: PointerBehavior;
 
+  /**
+   * When `true`, calls `requestDisallowInterceptTouchEvent(true)` on
+   * `ACTION_DOWN` so ancestor `ScrollView`s cannot steal the touch.
+   *
+   * **Default: `false`** — safe for layouts where the view is NOT nested
+   * inside a `ScrollView`. Keeping it `false` ensures sibling
+   * `TouchableOpacity` / `Pressable` buttons remain pressable while the
+   * joystick is active.
+   *
+   * Set to `true` only if you observe the joystick gesture being hijacked
+   * by a scroll container.
+   */
+  disallowInterceptTouchEvent?: boolean;
+
   /** Fired when a finger first touches down within this view's bounds. */
   onRawPointerDown?: (e: RawPointerEvent) => void;
 

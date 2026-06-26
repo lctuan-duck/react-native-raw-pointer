@@ -42,6 +42,15 @@ class RawPointerView : FrameLayout {
   private var behavior: String = "opaque"
 
   /**
+   * When true, calls requestDisallowInterceptTouchEvent(true) on ACTION_DOWN
+   * to prevent ancestor ScrollViews from stealing the touch.
+   *
+   * Default: false — safe for layouts where the joystick is NOT inside a
+   * ScrollView. Only enable when you observe scroll-stealing issues.
+   */
+  private var disallowInterceptOnDown: Boolean = false
+
+  /**
    * Screen density cached once — avoids DisplayMetrics lookup on every touch event.
    * Density is stable for the lifetime of a View; orientation/config changes
    * recreate the Activity and therefore all Views.
@@ -65,6 +74,10 @@ class RawPointerView : FrameLayout {
   fun setBehavior(value: String) {
     behavior = value
     isEnabled = value != "transparent"
+  }
+
+  fun setDisallowInterceptTouchEvent(value: Boolean) {
+    disallowInterceptOnDown = value
   }
 
   // -------------------------------------------------------------------------
@@ -93,11 +106,12 @@ class RawPointerView : FrameLayout {
    */
   override fun onTouchEvent(event: MotionEvent): Boolean {
     if (behavior == "transparent") return false
-
-    if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+    // requestDisallowInterceptTouchEvent is opt-in via the disallowInterceptTouchEvent prop.
+    // Disabled by default so sibling Pressable/TouchableOpacity views remain clickable.
+    // Enable when the view is inside a ScrollView to prevent scroll-stealing.
+    if (disallowInterceptOnDown && event.actionMasked == MotionEvent.ACTION_DOWN) {
       parent?.requestDisallowInterceptTouchEvent(true)
     }
-
     processMotionEvent(event)
     return true
   }

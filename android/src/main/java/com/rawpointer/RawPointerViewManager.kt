@@ -32,6 +32,17 @@ class RawPointerViewManager : ViewGroupManager<RawPointerView>() {
     view.setBehavior(value ?: "opaque")
   }
 
+  /**
+   * disallowInterceptTouchEvent (default false):
+   *   false — sibling buttons remain pressable (safe default, no ScrollView in ancestor chain)
+   *   true  — call requestDisallowInterceptTouchEvent on touch-down to prevent
+   *            ancestor ScrollViews from stealing the gesture
+   */
+  @ReactProp(name = "disallowInterceptTouchEvent", defaultBoolean = false)
+  fun setDisallowInterceptTouchEvent(view: RawPointerView, value: Boolean) {
+    view.setDisallowInterceptTouchEvent(value)
+  }
+
   companion object {
     const val NAME = "RawPointerView"
   }

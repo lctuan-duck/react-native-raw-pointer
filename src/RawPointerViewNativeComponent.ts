@@ -45,6 +45,14 @@ interface NativeProps extends ViewProps {
    */
   behavior?: WithDefault<string, 'opaque'>;
 
+  /**
+   * When true, calls requestDisallowInterceptTouchEvent on touch-down.
+   * Prevents ancestor ScrollViews from stealing the gesture.
+   * Default: false — keep disabled unless the view lives inside a ScrollView,
+   * otherwise sibling TouchableOpacity / Pressable buttons will be blocked.
+   */
+  disallowInterceptTouchEvent?: WithDefault<boolean, false>;
+
   /** Fired when a finger touches down within this view's bounds */
   onRawPointerDown?: DirectEventHandler<RawPointerNativeEvent>;
   /** Fired as a claimed finger moves */
