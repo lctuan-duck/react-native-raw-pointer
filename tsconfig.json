@@ -2,7 +2,8 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-raw-pointer": ["./src/index"]
+      "react-native-raw-pointer": ["./src/index"],
+      "react-native/Libraries/Types/CodegenTypes": ["./src/CodegenTypes.d.ts"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

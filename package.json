@@ -2,13 +2,21 @@
   "name": "react-native-raw-pointer",
   "version": "0.1.0",
   "description": "Generic raw pointer/touch event listener for React Native",
-  "main": "./src/index.tsx",
-  "types": "./src/index.tsx",
+  "main": "./lib/module/index.js",
+  "module": "./lib/module/index.js",
+  "types": "./lib/typescript/src/index.d.ts",
   "exports": {
     ".": {
       "source": "./src/index.tsx",
-      "types": "./src/index.tsx",
-      "default": "./src/index.tsx"
+      "require": {
+        "types": "./lib/typescript/src/index.d.ts",
+        "default": "./lib/module/index.js"
+      },
+      "import": {
+        "types": "./lib/typescript/src/index.d.ts",
+        "default": "./lib/module/index.js"
+      },
+      "default": "./lib/module/index.js"
     },
     "./package.json": "./package.json"
   },
@@ -78,7 +86,6 @@
     "react": "*",
     "react-native": "*"
   },
-
   "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
