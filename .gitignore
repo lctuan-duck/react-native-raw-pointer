@@ -68,6 +68,8 @@ android/keystores/debug.keystore
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+# Berry lockfile uses workspace:. protocol incompatible with yarn v1 consumers
+yarn.lock
 
 # Expo
 .expo/
