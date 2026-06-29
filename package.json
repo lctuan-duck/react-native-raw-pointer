@@ -48,7 +48,13 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "pointer",
+    "touch",
+    "event",
+    "listener",
+    "gesture",
+    "raw"
   ],
   "repository": {
     "type": "git",
